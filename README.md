@@ -2,7 +2,8 @@
 This project is a coding challenge from Chainalysis which shows prices of Bitcoin and Etheruem from 2 different exchanges (Bitfinex and Coinbase Exchange) and recommends the better option for buying or selling the coins.
 
 
-## Steps to run
+## How to run
+
 ## Available Scripts
 
 In the project directory, you can run:

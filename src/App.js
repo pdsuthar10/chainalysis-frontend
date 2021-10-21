@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Grid, Loader } from 'semantic-ui-react';
 import SocketIOClient from 'socket.io-client';
 import CoinCard from './components/CoinCard';
+import constants from './constants';
 
 import './App.css';
 
@@ -9,7 +10,7 @@ function App() {
   const [response, setResponse] = useState(null);
 
   useEffect(() => {
-    const socket = SocketIOClient('http://localhost:8080');
+    const socket = SocketIOClient(constants.API_BACKEND);
     socket.on('FromAPI', (data) => {
       if (!(data.bitcoin && data.bitcoin.length)) {
         if (response.bitcoin && response.bitcoin.length) {
