@@ -14,7 +14,6 @@ function App() {
     socket.on('FromAPI', (data) => {
       if (!(data.bitcoin && data.bitcoin.length)) {
         if (response.bitcoin && response.bitcoin.length) {
-          // eslint-disable-next-line no-param-reassign
           data.bitcoin = response.bitcoin;
         }
       }
@@ -22,7 +21,7 @@ function App() {
     });
 
     return () => socket.disconnect();
-  }, []);
+  }, [response]);
 
   const getExchangeList = (coin) => (response[coin] || []).map((exchange) => ({
     ...exchange,

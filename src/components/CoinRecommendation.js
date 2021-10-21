@@ -15,27 +15,27 @@ const CoinRecommendation = ({ exchangeA, exchangeB }) => {
   const [betterBuyOption, setBetterBuyOption] = useState(null);
   const [betterSellOption, setBetterSellOption] = useState(null);
 
-  const getBetterBuyOption = () => {
-    if (exchangeA.buy > exchangeB.buy) {
-      return exchangeB.name;
-    }
-    if (exchangeA.buy < exchangeB.buy) {
-      return exchangeA.name;
-    }
-    return null;
-  };
-
-  const getBetterSellOption = () => {
-    if (exchangeA.sell > exchangeB.sell) {
-      return exchangeA.name;
-    }
-    if (exchangeA.sell < exchangeB.sell) {
-      return exchangeB.name;
-    }
-    return null;
-  };
-
   useEffect(() => {
+    const getBetterBuyOption = () => {
+      if (exchangeA.buy > exchangeB.buy) {
+        return exchangeB.name;
+      }
+      if (exchangeA.buy < exchangeB.buy) {
+        return exchangeA.name;
+      }
+      return null;
+    };
+
+    const getBetterSellOption = () => {
+      if (exchangeA.sell > exchangeB.sell) {
+        return exchangeA.name;
+      }
+      if (exchangeA.sell < exchangeB.sell) {
+        return exchangeB.name;
+      }
+      return null;
+    };
+
     const calculatedBuyDiff = Number(Math.abs(exchangeA.buy - exchangeB.buy)
       .toFixed(constants.NUMBER_OF_DECIMAL));
     const calculatedSellDiff = Number(Math.abs(exchangeA.sell - exchangeB.sell)
