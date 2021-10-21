@@ -13,7 +13,7 @@ const CoinCard = ({ coinName, exchangeList }) => (
         <div className="coin-name-heading">
           <Image
             size="mini"
-            src={`Images/${coinName}.png`}
+            src={`images/${coinName}.png`}
           />
           &emsp;
           <h3>{coinName}</h3>
