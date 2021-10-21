@@ -12,16 +12,24 @@ function App() {
   useEffect(() => {
     const socket = SocketIOClient(constants.API_BACKEND);
     socket.on('FromAPI', (data) => {
-      if (!(data.bitcoin && data.bitcoin.length)) {
-        if (response.bitcoin && response.bitcoin.length) {
-          data.bitcoin = response.bitcoin;
+      setResponse((prev) => {
+        if (!(data.bitcoin && data.bitcoin.length)) {
+          if (prev.bitcoin && prev.bitcoin.length) {
+            data.bitcoin = prev.bitcoin;
+          }
         }
-      }
-      setResponse(data);
+
+        if (!(data.ethereum && data.ethereum.length)) {
+          if (prev.ethereum && prev.ethereum.length) {
+            data.ethereum = prev.ethereum;
+          }
+        }
+        return data;
+      });
     });
 
     return () => socket.disconnect();
-  }, [response]);
+  }, []);
 
   const getExchangeList = (coin) => (response[coin] || []).map((exchange) => ({
     ...exchange,
