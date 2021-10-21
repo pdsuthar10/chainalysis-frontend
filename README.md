@@ -1,7 +1,8 @@
-# Getting Started with Create React App
+# Chainalysis Crypto App - UI
+This project is a coding challenge from Chainalysis which shows prices of Bitcoin and Etheruem from 2 different exchanges (Bitfinex and Coinbase Exchange) and recommends the better option for buying or selling the coins.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Steps to run
 ## Available Scripts
 
 In the project directory, you can run:

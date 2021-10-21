@@ -1,0 +1,19 @@
+.ui.card.coin-card-wrapper {
+  width: 100%;
+}
+
+.ui.card > .header.coin-name {
+  background-color: rgb(33,37,41);
+  color: #fff;
+}
+
+.coin-name-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+}
+
+.coin-name-heading h3 {
+  margin: 0;
+}

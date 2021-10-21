@@ -1,23 +1,61 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import { Container, Grid, Loader } from 'semantic-ui-react';
+import SocketIOClient from 'socket.io-client';
+import CoinCard from './components/CoinCard';
+
 import './App.css';
 
 function App() {
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    const socket = SocketIOClient('http://localhost:8080');
+    socket.on('FromAPI', (data) => {
+      if (!(data.bitcoin && data.bitcoin.length)) {
+        if (response.bitcoin && response.bitcoin.length) {
+          // eslint-disable-next-line no-param-reassign
+          data.bitcoin = response.bitcoin;
+        }
+      }
+      setResponse(data);
+    });
+
+    return () => socket.disconnect();
+  }, []);
+
+  const getExchangeList = (coin) => (response[coin] || []).map((exchange) => ({
+    ...exchange,
+    buy: exchange.buy && Number(exchange.buy),
+    sell: exchange.sell && Number(exchange.sell),
+  }));
+
+  const getUIComponents = () => {
+    if (!response) {
+      return <Loader active className="custom-spinner" size="large">Loading</Loader>;
+    }
+
+    return (
+      <Grid container columns={2} stackable className="coin-grid">
+        <Grid.Row>
+          <Grid.Column>
+            <CoinCard coinName="Bitcoin" exchangeList={getExchangeList('bitcoin')} />
+          </Grid.Column>
+          <Grid.Column>
+            <CoinCard coinName="Ethereum" exchangeList={getExchangeList('ethereum')} />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="navbar">
+        <h2>Crypto Dashboard</h2>
+      </div>
+      <Container>
+        {getUIComponents()}
+      </Container>
     </div>
   );
 }

@@ -1,0 +1,26 @@
+.coin-recommendation-grid {
+  margin-top: 10px;
+}
+
+.message {
+  font-weight: bold;
+  text-align: left;
+}
+
+.message .content {
+  padding-top: 0.5rem;
+}
+
+.recommendation-wrapper .segment {
+  text-align: left;
+  -webkit-box-shadow: 0 0 0 1px #a3c293 inset,0 0 0 0 transparent;
+  box-shadow: 0 0 0 1px #a3c293 inset,0 0 0 0 transparent;
+  background-color: #fcfff5;
+  color: #2c662d;
+}
+
+.recommendation-content {
+  margin-top: 0.5rem;
+  line-height: 2rem;
+  font-weight: bold;
+}
