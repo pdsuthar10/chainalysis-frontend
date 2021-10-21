@@ -15,6 +15,9 @@ const CoinRecommendation = ({ exchangeA, exchangeB }) => {
   const [betterBuyOption, setBetterBuyOption] = useState(null);
   const [betterSellOption, setBetterSellOption] = useState(null);
 
+  // This effect will run on every change
+  // of exchanges and calculate the better option
+  // for buying/selling both the coins
   useEffect(() => {
     const getBetterBuyOption = () => {
       if (exchangeA.buy > exchangeB.buy) {
@@ -60,8 +63,10 @@ const CoinRecommendation = ({ exchangeA, exchangeB }) => {
     }
   }, [exchangeA, exchangeB]);
 
+  // Incase both the exchanges have same price
   const message = 'Both the exchanges have the same price of the coin. You can opt for any.';
 
+  // Returns a formatted string with recommendation and the difference
   const getRecommendation = (betterOption, difference, isBuy) => (
     betterOption ? `${betterOption} (${isBuy ? '-' : '+'}$${difference})` : message
   );

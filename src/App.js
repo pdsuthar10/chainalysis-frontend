@@ -13,6 +13,8 @@ function App() {
     const socket = SocketIOClient(constants.API_BACKEND);
     socket.on('FromAPI', (data) => {
       setResponse((prev) => {
+        // If the incoming data does not contains new information,
+        // then do not update the state value
         if (!(data.bitcoin && data.bitcoin.length)) {
           if (prev.bitcoin && prev.bitcoin.length) {
             data.bitcoin = prev.bitcoin;
@@ -28,9 +30,11 @@ function App() {
       });
     });
 
+    // Disconnect the socket on unmount of the component
     return () => socket.disconnect();
   }, []);
 
+  // Returns an array of exchanges with coin's buy/sell info
   const getExchangeList = (coin) => (response[coin] || []).map((exchange) => ({
     ...exchange,
     buy: exchange.buy && Number(exchange.buy),
